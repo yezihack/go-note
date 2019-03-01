@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	fmt.Println( common.Now(), "我是main.go里的init")
+	fmt.Println(common.Now(), "我是main.go里的init")
 }
 
 func main() {
