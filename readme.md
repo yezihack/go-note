@@ -1,6 +1,8 @@
-# 学习GO
+# go笔记
 
-> 学习资料
+[时光脚步的博客](https://www.sgfoot.com)
+
+## 学习资料
 
 #### [《Go入门指南》](https://github.com/yezihack/the-way-to-go_ZH_CN/blob/master/eBook/directory.md)
 
@@ -15,6 +17,10 @@
 1. 文件名小写
 1. 函数,方法,变量名采用驼峰命名法
 1. 接口以"er"结束
+
+## 学习目录
+1. [理解go执行顺序](理解go执行顺序)
+1. [理解defer执行顺序](理解defer执行顺序)
 
 ## 特殊
 ```
