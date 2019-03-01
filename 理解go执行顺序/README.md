@@ -34,7 +34,6 @@ import (
 			- demo2_1.go
     - main.go
 ```
-[github源码](https://github.com/yezihack/go-study/tree/master/%E7%90%86%E8%A7%A3go%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F)
 
 ### 执行结果并分析
 - 先按main.go的import包顺序加载
@@ -71,3 +70,5 @@ GoChannel执行中....
 2019-03-01 14:50:48.954641193 +0800 CST 我是main函数 END
 
 ```
+
+## 来源博客: [https://www.sgfoot.com/view/223](https://www.sgfoot.com/view/223)
