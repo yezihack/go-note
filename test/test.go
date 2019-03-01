@@ -1,5 +1,6 @@
 package test
 
+
 func Add(max int) {
 	number := 0
 	for {
