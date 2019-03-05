@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-
+	tmpS0()
 }
 
 const (
@@ -48,7 +48,9 @@ func s0() {
  func tmpS0() {
  	data := []int{1,2,3,4,5}
  	for _, val := range data {
+ 		val := val//使用临时变量
  		_ = &val
+ 		fmt.Println(&val)
 	}
  }
  func keyS1() {
