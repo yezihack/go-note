@@ -17,7 +17,7 @@ type ModelS struct {
 	DB *sql.DB
 }
 
-func NewDB(db *sql.DB) *ModelS {
+func NewDB(db *sql.DB) Modeler {
 	return &ModelS{
 		DB: db,
 	}

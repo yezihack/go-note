@@ -1,7 +1,6 @@
 package CURD
 
 import (
-	"database/sql"
 	"testing"
 	"fmt"
 )
@@ -14,10 +13,14 @@ var config = DBConfig{
 	DBName:  "kindled",
 	Charset: "utf8mb4",
 }
-var DB *sql.DB
+var (
+	MasterDB Modeler
+)
 
 func init() {
-	DB = InitDB(config)
+	db := InitDB(config)
+	model := NewDB(db)
+	MasterDB = model
 }
 /*
 CREATE TABLE `book` (
@@ -32,50 +35,50 @@ CREATE TABLE `book` (
  */
 
 func TestModelS_Find(t *testing.T) {
-	ls, err := NewDB(DB).Find("show tables")
+	ls, err := MasterDB.Find("select * from book")
 	if err != nil {
-		panic(err)
+		t.Error(err)
 	}
 	for f, item := range ls {
 		fmt.Println(f, item)
 	}
 }
 func TestModelS_First(t *testing.T) {
-	ls, err := NewDB(DB).First("select * from book where id = ?", 1)
+	ls, err := MasterDB.First("select * from book where id = ?", 1)
 	if err != nil {
-		panic(err)
+		t.Error(err)
 	}
 	for f, item := range ls {
 		fmt.Println(f, item)
 	}
 }
 func TestModelS_Pluck(t *testing.T) {
-	ls, err := NewDB(DB).Pluck("select * from book where id = ?", "book_name", 3)
+	ls, err := MasterDB.Pluck("select * from book where id = ?", "book_name", 3)
 	if err != nil {
-		panic(err)
+		t.Error(err)
 	}
 	for f, item := range ls {
 		fmt.Println(f, item)
 	}
 }
 func TestModelS_Insert(t *testing.T) {
-	ls, err := NewDB(DB).Insert("insert into book set book_name=?, book_author=?, book_province=?", "论语", "孔子", "山东")
+	ls, err := MasterDB.Insert("insert into book set book_name=?, book_author=?, book_province=?", "论语", "孔子", "山东")
 	if err != nil {
-		panic(err)
+		t.Error(err)
 	}
 	fmt.Println(ls)
 }
 func TestModelS_Update(t *testing.T) {
-	ls, err := NewDB(DB).Update("update book set book_name=? where id=?", "国学-论语", 3)
+	ls, err := MasterDB.Update("update book set book_name=? where id=?", "国学-论语", 3)
 	if err != nil {
-		panic(err)
+		t.Error(err)
 	}
 	fmt.Println(ls)
 }
 func TestModelS_Delete(t *testing.T) {
-	ls, err := NewDB(DB).Delete("delete from book where id = ?", 1)
+	ls, err := MasterDB.Delete("delete from book where id = ?", 1)
 	if err != nil {
-		panic(err)
+		t.Error(err)
 	}
 	fmt.Println(ls)
 }
