@@ -7,7 +7,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/360EntSecGroup-Skylar/excelize"
 	"encoding/json"
-	"github.com/yezihack/studyGo/excel操作学习/mysql"
 	"github.com/davecgh/go-spew/spew"
 )
 
@@ -84,29 +83,6 @@ func GetData() {
 	if err != nil {
 		fmt.Println(err)
 	}
-}
-
-
-func InsertDB(file string) {
-	result := GetExcelData(file)
-	if len(result) > 0 {
-		for _, item := range result {
-			b, err := json.Marshal(item)
-			if err != nil {
-				panic(err)
-			}
-			obj := mysql.DataComment{}
-			obj.Data = string(b)
-			ok, err1 := obj.Insert(DB)
-			if err1 != nil {
-				panic(err1)
-			}
-			if ok {
-				fmt.Println("ok", obj.Data)
-			}
-		}
-	}
-
 }
 
 func GetExcelData(path string) []*Comment {
