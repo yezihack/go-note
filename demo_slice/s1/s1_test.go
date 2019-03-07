@@ -2,6 +2,8 @@ package main
 
 import (
 	"testing"
+	"runtime"
+	"fmt"
 )
 
 /**
@@ -14,6 +16,10 @@ import (
  */
 
 /*************************小数据, 简单切片操作, 大约100个数据*********************************/
+func init() {
+	fmt.Println("马立全开")
+	runtime.GOMAXPROCS(runtime.NumCPU())
+}
 
 func Benchmark小数据100_简单切片操作0(t *testing.B) {
 	t.ResetTimer()
