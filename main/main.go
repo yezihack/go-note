@@ -4,26 +4,58 @@ import (
 	"fmt"
 
 	"bytes"
-	"strings"
 	"regexp"
+	"strings"
 	"sync"
+
+	"log"
+	"reflect"
 )
 
 func main() {
-	s1 := NewOne()
-	s2 := NewOne()
-	if s1 == s2 {
-		fmt.Println("相同")
-	} else {
-		fmt.Println("不相同")
-	}
+	//buff := new(bytes.Buffer)
+	//log.SetOutput(buff)
+	//log.SetFlags(log.Lshortfile)
+	//log.SetPrefix("[INFO]")
+	//log.Print("test")
+	//log.SetOutput(os.Stdout)
+	//log.Print("aaaa")
+	//buff.Reset()
+	var r []int
+	p(r)
+}
+func p(value interface{}) {
+	dest := reflect.Indirect(reflect.ValueOf(value))
+	fmt.Println(dest.Kind())
+	fmt.Println(reflect.ValueOf(value).Kind())
+}
+
+func tt1() {
+	var (
+		buf    bytes.Buffer
+		logger = log.New(&buf, "INFO: ", log.Lshortfile|log.LstdFlags)
+		infof = func(info string) {
+			logger.Output(2, info)
+		}
+	)
+
+	infof("Hello world")
+
+	fmt.Print(&buf)
+}
+func testlog() {
+	buff := new(bytes.Buffer)
+	log.New(buff, "ERROR", log.LstdFlags|log.Lshortfile)
+	log.Print("aaaaabbbbbbbbbbb")
 }
 
 type one struct {
 }
+
 var oc sync.Once
 var oe *one
-func NewOne() *one{
+
+func NewOne() *one {
 	oc.Do(func() {
 		oe = &one{}
 	})
@@ -51,14 +83,13 @@ func CheckCharDoSpecial(s string, char byte) string {
 				buf.Reset()
 			}
 			//处理最后一批数据
-			if buf.Len() > 0 && key == len(arr) - 1 {
+			if buf.Len() > 0 && key == len(arr)-1 {
 				result = append(result, buf.String())
 			}
 		}
 	}
 	return strings.Join(result, string(char))
 }
-
 
 //拼接特殊字符串
 func FormatField(field string, formats []string) string {

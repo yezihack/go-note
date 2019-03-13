@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/yezihack/studyGo/sFmt/s1"
 	"runtime"
+
+	"github.com/yezihack/studyGo/sFmt/s1"
 )
 
 /*
@@ -18,6 +19,6 @@ func main() {
 	fmt.Println(runtime.Caller(2))
 	fmt.Println(runtime.Caller(3))
 	fmt.Println(runtime.Caller(4))
-	aa := []int{1,2,3}
+	aa := []int{1, 2, 3}
 	fmt.Println(aa[2:])
 }

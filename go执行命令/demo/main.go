@@ -1,8 +1,8 @@
 package main
 
 import (
-	"os/exec"
 	"fmt"
+	"os/exec"
 )
 
 func test() {

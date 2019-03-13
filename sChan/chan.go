@@ -2,8 +2,9 @@ package sChan
 
 import (
 	"fmt"
-	"github.com/rs/zerolog/log"
 	"time"
+
+	"github.com/rs/zerolog/log"
 )
 
 /**********************

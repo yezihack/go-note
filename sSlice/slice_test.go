@@ -7,12 +7,12 @@ func TestStudySlice(t *testing.T) {
 }
 
 func BenchmarkForSlice(b *testing.B) {
-	for i := 0;i < b.N; i ++ {
+	for i := 0; i < b.N; i++ {
 		ForSlice()
 	}
 }
 func BenchmarkForArray(b *testing.B) {
-	for i := 0; i < b.N; i ++ {
+	for i := 0; i < b.N; i++ {
 		ForArray()
 	}
 }

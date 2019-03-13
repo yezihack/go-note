@@ -9,7 +9,7 @@ const (
 	AA = iota
 	BB
 	CC = iota + 2
-	DD  = iota
+	DD = iota
 	EE
 )
 

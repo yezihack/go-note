@@ -8,10 +8,10 @@ func GetS1() {
 	}
 	b := make([]aa, 0)
 	b = append(b, aa{
-		name:"king",
+		name: "king",
 	})
 	b = append(b, aa{
-		name:"wang",
+		name: "wang",
 	})
 	fmt.Printf("%T\n", b)
 	fmt.Printf("%v\n", b)

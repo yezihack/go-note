@@ -2,9 +2,10 @@ package sSelect
 
 import (
 	"fmt"
-	"time"
 	"runtime"
+	"time"
 )
+
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 }

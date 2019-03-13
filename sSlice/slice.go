@@ -27,14 +27,14 @@ func StudySlice() {
 
 func ForArray() [1024]int {
 	var a [1024]int
-	for i := 0; i < len(a); i ++ {
+	for i := 0; i < len(a); i++ {
 		a[i] = i
 	}
 	return a
 }
 func ForSlice() []int {
 	a := make([]int, 1024)
-	for i := 0 ;i <len(a); i ++ {
+	for i := 0; i < len(a); i++ {
 		a[i] = i
 	}
 	return a

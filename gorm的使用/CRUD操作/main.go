@@ -1,37 +1,52 @@
 package main
 
 import (
-	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"time"
+	"github.com/jinzhu/gorm"
+	"fmt"
+	"github.com/davecgh/go-spew/spew"
 )
 
-type Product struct {
-	gorm.Model
-	Code  string
-	Price uint
-}
+
 
 func main() {
-	db, err := gorm.Open("mysql", "test.db")
+	db, err := gorm.Open("mysql", "root:123456@tcp(localhost:3308)/kindled?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
-		panic("连接数据库失败")
+		panic(err)
 	}
 	defer db.Close()
+	Find(db)
+}
 
-	// 自动迁移模式
-	db.AutoMigrate(&Product{})
+func Find(db *gorm.DB) {
+	//bk := make([]Book, 0)
 
-	// 创建
-	db.Create(&Product{Code: "L1212", Price: 1000})
+	bk := new(Book)
+	spew.Dump(bk)
+	db.First(&bk, "id=?", 7)
+	fmt.Println(bk)
+}
+//新增
+func Create(db *gorm.DB) {
+	var bk Book
+	bk.BookName = "相约星期二"
+	bk.BookAuthor = "米奇·阿尔博姆"
+	bk.BookProvince = "美国"
+	db.Create(&bk)
+	fmt.Println(bk.Id) //获取新增ID
+}
 
-	// 读取
-	var product Product
-	db.First(&product, 1)                   // 查询id为1的product
-	db.First(&product, "code = ?", "L1212") // 查询code为l1212的product
+type Book struct {
+	gorm.Model
+	Id int `gorm:"id"`
+	BookName string `gorm:"book_name"`
+	BookAuthor string `gorm:"book_author"`
+	BookProvince string `gorm:"book_province"`
+	CreatedAt time.Time `gorm:"created_at"`
+	UpdatedAt time.Time `gorm:"updated_at"`
+}
 
-	// 更新 - 更新product的price为2000
-	db.Model(&product).Update("Price", 2000)
-
-	// 删除 - 删除product
-	db.Delete(&product)
+func (Book) TableName() string {
+	return "book"
 }

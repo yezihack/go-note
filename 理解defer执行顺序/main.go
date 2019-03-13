@@ -1,12 +1,13 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"time"
+
+	"github.com/yezihack/studyGo/理解go执行顺序/common"
 	"github.com/yezihack/studyGo/理解go执行顺序/demo1"
 	"github.com/yezihack/studyGo/理解go执行顺序/demo2"
-	"time"
-	"github.com/yezihack/studyGo/理解go执行顺序/common"
-	"flag"
 )
 
 func init() {

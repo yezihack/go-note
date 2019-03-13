@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+
 	f "github.com/yezihack/studyGo/sFlag/exp1/flag"
 )
 
@@ -17,5 +18,3 @@ func main() {
 	fmt.Println(tables)
 	fmt.Println(f.GetName())
 }
-
-

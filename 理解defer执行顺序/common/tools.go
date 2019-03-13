@@ -1,8 +1,8 @@
 package common
 
 import (
-	"time"
 	"fmt"
+	"time"
 )
 
 func init() {
@@ -16,31 +16,3 @@ func Now() time.Time {
 	time.Local = chinaTime
 	return time.Now().Local()
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
