@@ -10,6 +10,7 @@ go test -bench=. -cpu=1,2,3,4 -count=1 -benchmem
 ```
 
 # 基准结果
+> 原生sql快于GROM 约3.5倍, 因为gorm使用反射,优点代码量少.
 
 ```
 BenchmarkGetBlackListByOri             3         360152671 ns/op        126615634 B/op   1947154 allocs/op
