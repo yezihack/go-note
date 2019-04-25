@@ -2,6 +2,8 @@ package models
 
 import (
 	"database/sql"
+	"time"
+	"github.com/go-sql-driver/mysql"
 )
 
 type Modeler interface {
@@ -24,16 +26,16 @@ type Book struct {
 	BookName     string
 	BookAuthor   string
 	BookProvince string
-	CreatedAt    string
-	UpdatedAt    string
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 type BookNull struct {
 	Id           sql.NullInt64
 	BookName     sql.NullString
 	BookAuthor   sql.NullString
 	BookProvince sql.NullString
-	CreatedAt    sql.NullString
-	UpdatedAt    sql.NullString
+	CreatedAt    mysql.NullTime
+	UpdatedAt    mysql.NullTime
 }
 type BookModel struct {
 	DB *sql.DB
@@ -52,8 +54,8 @@ func (m *BookModel) getColumns() string {
 }
 
 //获取多行数据.
-func (m *BookModel) getRows(sql string, params ...interface{}) (rowsResult []*Book, err error) {
-	query, err := m.DB.Query(sql, params...)
+func (m *BookModel) getRows(sqlTxt string, params ...interface{}) (rowsResult []*Book, err error) {
+	query, err := m.DB.Query(sqlTxt, params...)
 	defer query.Close()
 	if err != nil {
 		return
@@ -76,8 +78,8 @@ func (m *BookModel) getRows(sql string, params ...interface{}) (rowsResult []*Bo
 			BookName:     row.BookName.String,
 			BookAuthor:   row.BookAuthor.String,
 			BookProvince: row.BookProvince.String,
-			UpdatedAt:    row.UpdatedAt.String, //更新时间
-			CreatedAt:    row.CreatedAt.String, //添加时间
+			UpdatedAt:    row.UpdatedAt.Time, //更新时间
+			CreatedAt:    row.CreatedAt.Time, //添加时间
 		})
 	}
 	return
@@ -106,9 +108,10 @@ func (m *BookModel) getRow(sql string, params ...interface{}) (rowResult *Book, 
 		BookName:     row.BookName.String,
 		BookAuthor:   row.BookAuthor.String,
 		BookProvince: row.BookProvince.String,
-		UpdatedAt:    row.UpdatedAt.String, //更新时间
-		CreatedAt:    row.CreatedAt.String, //添加时间
+		UpdatedAt:    row.UpdatedAt.Time, //更新时间
+		CreatedAt:    row.CreatedAt.Time, //添加时间
 	}
+
 	return
 }
 
@@ -135,21 +138,14 @@ func (m *BookModel) Create(value *Book) (lastId int64, err error) {
 	}
 	return
 }
-
 //更新数据
-func (m *BookModel) Update(value *Book) (b bool, err error) {
-	sqlText := "UPDATE " + BookTable + " SET book_name=?, book_author=?, book_province=? WHERE id=?"
-	stmt, err := m.DB.Prepare(sqlText)
+func (m *BookModel) saveBody(sqlTxt string, params []interface{}) (b bool, err error) {
+	stmt, err := m.DB.Prepare(sqlTxt)
 	if err != nil {
 		return
 	}
 	defer stmt.Close()
-	result, err := stmt.Exec(
-		&value.BookName,
-		&value.BookProvince,
-		&value.BookProvince,
-		&value.Id,
-	)
+	result, err := stmt.Exec(params...)
 	if err != nil {
 		return
 	}
@@ -160,6 +156,16 @@ func (m *BookModel) Update(value *Book) (b bool, err error) {
 	}
 	b = affectCount > 0
 	return
+}
+//更新数据
+func (m *BookModel) Update(value *Book) (b bool, err error) {
+	sqlText := "UPDATE " + BookTable + " SET book_name=?, book_author=?, book_province=? WHERE id=?"
+	var params []interface{}
+	params = append(params, value.BookName)
+	params = append(params, value.BookAuthor)
+	params = append(params, value.BookProvince)
+	params = append(params, value.Id)
+	return m.saveBody(sqlText, params)
 }
 
 //查询多行数据

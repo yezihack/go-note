@@ -5,7 +5,6 @@ import (
 	"time"
 	"github.com/jinzhu/gorm"
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
 )
 
 
@@ -23,8 +22,8 @@ func Find(db *gorm.DB) {
 	//bk := make([]Book, 0)
 
 	bk := new(Book)
-	spew.Dump(bk)
-	db.First(&bk, "id=?", 7)
+
+	db.First(&bk, 1)
 	fmt.Println(bk)
 }
 //新增
@@ -38,15 +37,10 @@ func Create(db *gorm.DB) {
 }
 
 type Book struct {
-	gorm.Model
-	Id int `gorm:"id"`
+	Id int `gorm:"id" gorm:"primary_key"`
 	BookName string `gorm:"book_name"`
 	BookAuthor string `gorm:"book_author"`
 	BookProvince string `gorm:"book_province"`
 	CreatedAt time.Time `gorm:"created_at"`
 	UpdatedAt time.Time `gorm:"updated_at"`
-}
-
-func (Book) TableName() string {
-	return "book"
 }

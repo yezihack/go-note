@@ -37,7 +37,7 @@ func main() {
 	}
 	db := InitDB(cfg)
 	model := models.NewBook(db)
-	res, err := model.Find(nil)
+	_, err := model.Find(nil)
 	if err !=nil {
 		panic(err)
 	}

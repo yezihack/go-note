@@ -5,22 +5,34 @@ import (
 	"fmt"
 	"testing"
 	_ "github.com/go-sql-driver/mysql"
+	"net/url"
+	"strings"
 )
 
-
-
-type DBConfig struct {
-	Host    string
-	Port    int
-	Name    string
-	Pass    string
-	DBName  string
-	Charset string
+type DBConfigEntity struct {
+	Host    string //地址
+	Port    int //端口
+	Name    string //用户
+	Pass    string //密码
+	DBName  string //库名
+	Charset string //编码
+	Timezone string //时区
 }
 
 //连接数据库
-func InitDB(cfg DBConfig) *sql.DB {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s", cfg.Name, cfg.Pass, cfg.Host, cfg.Port, cfg.DBName, cfg.Charset)
+func InitDB(cfg DBConfigEntity) *sql.DB {
+	if strings.EqualFold(cfg.Timezone, "") {
+		cfg.Timezone = "'Asia/Shanghai'"
+	}
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=true&loc=Local&time_zone=%s",
+		cfg.Name,
+		cfg.Pass,
+		cfg.Host,
+		cfg.Port,
+		cfg.DBName,
+		cfg.Charset,
+		url.QueryEscape(cfg.Timezone),
+	)
 	connection, err := sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)
@@ -31,7 +43,7 @@ var DB *sql.DB
 var BookDb *BookModel
 
 func init() {
-	cfg := DBConfig{
+	cfg := DBConfigEntity{
 		Host:"localhost",
 		Port:3308,
 		Name:"root",
@@ -51,7 +63,7 @@ func TestBookModel_Find(t *testing.T) {
 }
 func TestBookModel_Create(t *testing.T) {
 	bk := Book{
-		BookName:"书",
+		BookName:"书2",
 		BookAuthor:"未知",
 		BookProvince:"未知",
 	}
@@ -62,6 +74,7 @@ func TestBookModel_Create(t *testing.T) {
 	if lastId == 0 {
 		t.Error("error")
 	}
+	fmt.Println(lastId)
 }
 func TestBookModel_Count(t *testing.T) {
 	c, err := BookDb.Count()
