@@ -5,34 +5,12 @@ package chat;
 service ChatService {
     //发送消息
     rpc Send(SendRequest) returns (SendReply){};
-    //接受消息
-    rpc Receive(ReceiveRequest) returns (ReceiveReply){};
 }
 //发送消息 请求结构体
 message SendRequest {
-    string flag = 1;//消息标识
-    int64 user_id = 2;//发送用户ID
-    int64 to_user_id = 3;//接受用户ID
-    string content = 4;//发送内容
+    string content = 1;//发送内容
 }
 //发送消息 响应结构体
 message SendReply {
-    int32 status = 1;//返回状态码
-    string msg = 2;//返回消息
-}
-
-//接受消息 请求结构体
-message ReceiveRequest {
-    string flag = 1; //消息标识
-    int64 to_user_id = 2;//接收者的user_id
-}
-
-//接受消息
-message ReceiveData {
-    int64 user_id = 1;//发送者ID
-    int64 to_user_id = 2;//接收者ID
-    string content = 3;//内容
-}
-message ReceiveReply {
-    repeated ReceiveData data_list = 1;
+    string msg = 1;//返回消息
 }

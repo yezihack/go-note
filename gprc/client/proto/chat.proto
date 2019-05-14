@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package chat;
+
+service ChatService {
+    //发送消息
+    rpc Send(SendRequest) returns (SendReply){};
+}
+//发送消息 请求结构体
+message SendRequest {
+    string content = 1;//发送内容
+}
+//发送消息 响应结构体
+message SendReply {
+    string msg = 1;//返回消息
+}

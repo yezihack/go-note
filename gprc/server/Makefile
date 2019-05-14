@@ -11,11 +11,11 @@ clean:
 	rm -rf output/
 
 dev: install
-	go build -o output/grpc_chat ./app
+	go build -o output/chat_service ./app
 
 test: install
-	go build  -o output/grpc_chat ./app
+	go build  -o output/chat_service ./app
 
-run:
-	ETCD_ADDR=127.0.0.1:12379 output/grpc_chat
+run:dev
+	ETCD_ADDR=127.0.0.1:12379 output/chat_service
 
