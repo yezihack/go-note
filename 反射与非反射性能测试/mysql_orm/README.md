@@ -22,3 +22,6 @@ BenchmarkGetBlackListByOrm-2           1        1525479786 ns/op        42903295
 BenchmarkGetBlackListByOrm-3           1        1733162526 ns/op        429032584 B/op   8671077 allocs/op
 BenchmarkGetBlackListByOrm-4           1        1670718181 ns/op        429033016 B/op   8671078 allocs/op
 ```
+
+## 使用工具生成原生的SQL
+> MYSQL生成每一个表的CRUD操作 https://github.com/yezihack/go-mygen

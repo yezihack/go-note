@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 type Person struct {
 	Age int
@@ -33,6 +36,7 @@ func (p *Person) Print() {
 func main() {
 	c <- 900
 	p := New()
+	time.Sleep(time.Millisecond * 800)
 	p.Print()
 }
 

@@ -1,6 +1,9 @@
 package sSlice
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestStudySlice(t *testing.T) {
 	StudySlice()
@@ -15,4 +18,24 @@ func BenchmarkForArray(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		ForArray()
 	}
+}
+
+func TestMoon_Result(t *testing.T) {
+	var ret string
+	ret = moon.Result()
+	ret = moon.Result()
+	ret = moon.Result()
+	fmt.Println(moon.len())
+	ret = moon.Result()
+	ret = moon.Result()
+	ret = moon.Result()
+	fmt.Println(moon.len())
+	ret = moon.Result()
+	ret = moon.Result()
+	ret = moon.Result()
+	fmt.Println(moon.len())
+	ret = moon.Result()
+	ret = moon.Result()
+	fmt.Println(moon.len())
+	fmt.Println(ret)
 }

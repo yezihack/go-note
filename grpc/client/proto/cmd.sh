@@ -11,9 +11,8 @@
 # See also
 #  https://github.com/grpc/grpc-go/tree/master/examples
 
-#protoc --go_out=plugins=grpc+grpcx:. *.proto
 protoc --go_out=plugins=grpc:. *.proto
 
-sed -i "" "s/TODO: replace this with your service name/go_love_ticket/g" *.pb.go
+sed -i "" "s/TODO: replace this with your service name//g" *.pb.go
 
 sed -i "" "s/,omitempty//g" *.pb.go

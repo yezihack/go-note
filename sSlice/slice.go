@@ -2,6 +2,8 @@ package sSlice
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 	"unsafe"
 )
 
@@ -38,4 +40,64 @@ func ForSlice() []int {
 		a[i] = i
 	}
 	return a
+}
+
+type Base struct {
+	Name string
+}
+type Moon struct {
+	List []Base
+	Have []Base
+}
+
+var Location = []string{
+	"中国", "日本", "美国", "新加坡", "加拿大", "新西兰",
+}
+
+var moon Moon
+
+func init() {
+	moon.Init()
+}
+
+func (m *Moon) Init() {
+	for _, v := range Location {
+		m.Have = append(m.Have, Base{v})
+	}
+	fmt.Println("Init-Have", m.Have)
+}
+
+//已经存在的长度
+func (m *Moon) len() int {
+	return len(m.List)
+}
+
+//重置
+func (m *Moon) Reset() {
+	m.List = append(m.List[:0])
+}
+
+//获取结果
+func (m *Moon) Result() string {
+	//获取对应的值
+	index := m.Random()
+
+	//随机过的存储起来
+	m.List = append(m.List, Base{
+		Location[index],
+	})
+	fmt.Println("Result", m.List)
+	return Location[index]
+}
+
+func (m *Moon) Random() int {
+	//随机种子
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	if m.len() >= 3 { //满五则重置
+		fmt.Println("重置啦")
+		m.Reset()
+	}
+	//随机一个数
+	index := r.Intn(len(m.Have))
+	return index
 }
