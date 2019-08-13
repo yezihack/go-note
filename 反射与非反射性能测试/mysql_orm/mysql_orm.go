@@ -2,13 +2,13 @@ package mysql_orm
 
 import (
 	"database/sql"
+	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"math/rand"
 	"github.com/yezihack/now"
-	"fmt"
-	"sync"
+	"math/rand"
 	"runtime"
+	"sync"
 )
 
 type DBPool struct {
@@ -19,6 +19,7 @@ type DBPool struct {
 var Pools DBPool
 
 func init() {
+
 	var err error
 	Pools.OrmDB, err = gorm.Open("mysql", "root:123456@tcp(127.0.0.1:3308)/sys?charset=utf8")
 	if err != nil {
@@ -28,6 +29,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
 }
 
 type Category struct {
@@ -112,10 +114,10 @@ func InsertBlackList() {
 	ShowNumberGoruntine()
 	wg := sync.WaitGroup{}
 	wg.Add(10)
-	for j := 0; j < 10; j ++ {
+	for j := 0; j < 10; j++ {
 		go func(j int, wg *sync.WaitGroup) {
 			defer wg.Done()
-			for i := 0; i < 100; i ++ {
+			for i := 0; i < 100; i++ {
 				fmt.Printf("j:%d, i:%d\n", j, i)
 				var list BlackList
 				list.UserId = rand.Intn(100)
@@ -127,7 +129,7 @@ func InsertBlackList() {
 				Pools.OrmDB.Table("blacklist").Create(&list)
 			}
 
-		}(j,&wg)
+		}(j, &wg)
 	}
 	wg.Wait()
 }
