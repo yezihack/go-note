@@ -51,7 +51,6 @@ func Show(stop chan struct{}) {
 				fmt.Println("timer:", 22)
 				t.Reset(time.Second)
 			}
-
 		}
 	}(timer)
 
@@ -64,13 +63,14 @@ func Show(stop chan struct{}) {
 	}(ticker, timer) //以形参方式将外部的变量传递进来,避免变量逃逸
 
 	//以下代码改为上面的写法.
-	//go func() {
-	//	timer.Stop()
-	//	ticker.Stop()
-	//}()
+	go func() {
+		<-stop
+		timer.Stop()
+		ticker.Stop()
+	}()
 }
 
 //关于堆栈和指针上的语言力学
-//https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html
+// https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html
 // go build -gcflags '-m -l'  逃逸分析
 // go tool compile -m timer.go
