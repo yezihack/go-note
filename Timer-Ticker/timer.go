@@ -70,7 +70,6 @@ func Show(stop chan struct{}) {
 	}()
 }
 
-//关于堆栈和指针上的语言力学
-// https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html
+// 关于堆栈和指针上的语言力学 https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html
 // go build -gcflags '-m -l' 逃逸分析
 // go tool compile -m timer.go
