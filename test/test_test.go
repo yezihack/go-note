@@ -7,6 +7,17 @@ import (
 	"time"
 )
 
+
+func TestPointer(t *testing.T) {
+	type mystr struct {
+		name *string
+	}
+	s := new(mystr)
+	name := "china"
+	s.name = &name
+	fmt.Println(*s.name)
+}
+
 func BenchmarkAdd(b *testing.B) {
 	Add(1000)
 }
