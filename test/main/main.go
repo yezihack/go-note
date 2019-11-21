@@ -23,11 +23,4 @@ func (f *Feed) Print() {
 }
 
 func main() {
-	var p *int
-	p = new(int)
-	*p = 300
-	fmt.Println(*p)
-	fmt.Println(&p)
-	fmt.Println(*&p)
-	fmt.Println(*&*&p)
 }

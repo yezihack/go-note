@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 //切片可以理解成: 动态数组
+//切片通过对数组进行封装，为数据序列提供了更通用、强大而方便的接口
 func main() {
 	//1.声明一个切片
 	var s []int
