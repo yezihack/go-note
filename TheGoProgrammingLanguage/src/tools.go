@@ -17,7 +17,11 @@ func Asset(name interface{}, t *testing.T, expect, actual interface{}) {
 		nameStr = "default"
 	}
 	t.Run(nameStr, func(t *testing.T) {
-		if expect != actual {
+		if expect == nil {
+			if expect != actual {
+				t.Errorf("%s, expect:%v, actual:%v\n", t.Name(), expect, actual)
+			}
+		} else if expect != actual {
 			t.Errorf("%s, expect:%v, actual:%v\n", t.Name(), expect, actual)
 		}
 	})

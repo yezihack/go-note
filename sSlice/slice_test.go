@@ -20,6 +20,14 @@ func BenchmarkForArray(b *testing.B) {
 	}
 }
 
+func TestForSlice(t *testing.T) {
+	SliceSort()
+}
+
+func TestLessSort(t *testing.T) {
+	LessSort()
+}
+
 func TestMoon_Result(t *testing.T) {
 	var ret string
 	ret = moon.Result()
