@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+//context包, 作用起到广播作用.通信其它协程,我的任务已经处理完了.
+
 func isCancelContext(ctx context.Context) bool {
 	select {
 	case <-ctx.Done()://接受取消通知
@@ -21,6 +23,7 @@ func main() {
 	for i := 0; i < 5; i ++ {
 		go func(i int) {
 			for {
+				//判断是否关闭.
 				if isCancelContext(ctx) {
 					break
 				}
