@@ -5,7 +5,7 @@
 3. 创建一个适配器,并实现新接口里的所有方法.
 4. 适配器里持有一个旧接口.并现在新接口与旧接口的对接工作.
 */
-package main
+package Patterm
 
 import "fmt"
 
@@ -85,15 +85,6 @@ func (a *SDAdapterTF) WriteSD(data string) {
 }
 
 func main() {
-	var computer ComputerI
-	computer = NewComputer()
-	sd := NewSDCard()
-	sd.WriteSD("智零小姐姐")
-	computer.ReadSD(sd)
 
-	tf := NewTFCard()
-	tf.WriteTF("我是一张旧照片")
-	ad := NewSDAdapterTF(tf)
-	ad.ReadSD()
 
 }
