@@ -83,8 +83,3 @@ func (a *SDAdapterTF) ReadSD() {
 func (a *SDAdapterTF) WriteSD(data string) {
 	a.tf.WriteTF(data)
 }
-
-func main() {
-
-
-}
