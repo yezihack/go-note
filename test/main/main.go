@@ -23,4 +23,11 @@ func (f *Feed) Print() {
 }
 
 func main() {
+	type s struct {
+		a int
+		b int
+	}
+	var b = s{1, 2,
+		}
+	
 }
