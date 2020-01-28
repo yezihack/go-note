@@ -4,8 +4,8 @@
 
 ## 学习资料
 
-#### [《Go入门指南》](https://github.com/yezihack/the-way-to-go_ZH_CN/blob/master/eBook/directory.md)
-
+1. [Go入门指南](https://github.com/yezihack/the-way-to-go_ZH_CN/blob/master/eBook/directory.md)
+1. [GO学习索引](https://github.com/unknwon/go-study-index)
 
 ## 命令
 1. go build 编译并安装自身包和依赖包
