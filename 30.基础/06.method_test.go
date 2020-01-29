@@ -13,14 +13,14 @@ type Factory struct {
 type Car struct {
 	Name string
 }
-func NewCar() *Car {
-	return &Car{}
-}
 func (*Car) Show() {
 	fmt.Println("car")
 }
 func NewFactory() *Factory {
-	return &Factory{{"mini Car"}, "This is Factory"}
+	return &Factory{
+		 Car{"Mini Car"},
+		"aa",
+	}
 }
 func TestCar(t *testing.T) {
 	c := Car{}
