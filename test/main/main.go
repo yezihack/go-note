@@ -21,13 +21,15 @@ func (f *Feed) Print() {
 	}()
 
 }
-
+func print_hello() {
+	defer func() {
+		fmt.Println("a")
+	}()
+	go func() {recover()}()
+	//defer recover()
+	defer func() {fmt.Println("b")}()
+	panic("c")
+}
 func main() {
-	type s struct {
-		a int
-		b int
-	}
-	var b = s{1, 2,
-		}
-	
+	print_hello()
 }
