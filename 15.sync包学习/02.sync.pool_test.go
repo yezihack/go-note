@@ -25,6 +25,7 @@ import (
 
 
 func TestSyncPool(t *testing.T) {
+
 	pool := sync.Pool{
 		New: func() interface{} {
 			fmt.Println("Create a New Object")

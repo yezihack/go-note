@@ -9,12 +9,12 @@ func NewTokenLimiterService(interval time.Duration, maxCount int) *TokenLimiterS
 	t := TokenLimiterService{
 		token:make(chan struct{}, maxCount),
 	}
-	go func() {
-		ticker := time.NewTicker(time.Nanosecond * maxCount/ interval * 1000 * 1000)
-		for {
-			<-ticker.C
-			t.token <- struct{}{}
-		}
-	}()
+	//go func() {
+	//	ticker := time.NewTicker( time.Duration(maxCount/ interval * 1000 * 1000))
+	//	for {
+	//		<-ticker.C
+	//		t.token <- struct{}{}
+	//	}
+	//}()
 	return &t
 }

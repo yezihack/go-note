@@ -30,16 +30,19 @@ func TestSyncMap(t *testing.T) {
 	if ok {
 		fmt.Println("v", v)
 	}
-	//存储值,如果存在, OK=TRUE, 返回V1.返回二个元素.
+	//存储值,如果存在, OK=TRUE, 返回V1.返回二个元素. 存在返回旧值, 新值不会存储的.
 	v1, ok := sm.LoadOrStore("aa", 22)
 	if ok {
-		fmt.Println("v1", v1)
+		fmt.Println("v1已存在", v1)
 	}
-	//如果不存在, OK=FALSE
+	fmt.Println("aa: ")
+	fmt.Println(sm.Load("aa"))
+	//如果不存在, OK=FALSE, 则设置成功
 	v2, ok := sm.LoadOrStore("aa1", 22)
 	fmt.Println("v2", v2, "ok", ok)
 	sm.Range(func(key, value interface{}) bool {
 		fmt.Println("range", "key", key, "value", value)
 		return true
 	})
+
 }
