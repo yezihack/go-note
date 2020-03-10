@@ -1,6 +1,6 @@
 package mlib
 
-import "code.qschou.com/golang/errors"
+import "errors"
 
 type MusicEntry struct {
 	Id string

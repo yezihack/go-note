@@ -1,7 +1,7 @@
 package _0_基础
 
 import (
-	"code.qschou.com/golang/errors"
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"

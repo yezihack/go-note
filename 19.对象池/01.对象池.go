@@ -1,7 +1,7 @@
 package _9_对象池
 
 import (
-	"code.qschou.com/golang/errors"
+	"errors"
 	"time"
 )
 

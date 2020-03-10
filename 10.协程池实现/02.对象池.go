@@ -1,9 +1,9 @@
 package main
 
 import (
-	"code.qschou.com/golang/errors"
+	"errors"
 	"fmt"
-	"github.com/labstack/gommon/log"
+	"log"
 	"time"
 )
 

@@ -2,7 +2,7 @@ package file_operation
 
 import (
 	"bytes"
-	"code.qschou.com/golang/errors"
+	"errors"
 	"fmt"
 	"os"
 	"strconv"

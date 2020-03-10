@@ -1,7 +1,7 @@
 package main
 
 import (
-	"code.qschou.com/golang/errors"
+	"errors"
 	"fmt"
 	"log"
 	"math"
