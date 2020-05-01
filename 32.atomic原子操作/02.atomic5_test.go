@@ -1,4 +1,4 @@
-package _2_atomic原子操作
+package _2_atomic
 
 import (
 	"fmt"
