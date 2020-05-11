@@ -1,9 +1,10 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/gommon/log"
-	"net/http"
 )
 
 func main() {
@@ -19,8 +20,8 @@ func main() {
 		return ctx.String(http.StatusOK, "world-bb")
 	})
 	err := e.StartServer(&http.Server{
-		Addr:":9092",
-		ReadTimeout:5,
+		Addr:        ":9092",
+		ReadTimeout: 5,
 	})
 	if err != nil {
 		log.Fatal(err)

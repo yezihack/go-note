@@ -1,16 +1,18 @@
 package main
 
 import (
-	"github.com/labstack/gommon/log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+
+	"github.com/labstack/gommon/log"
 )
 
 type handle struct {
 	host string
 	port string
 }
+
 func (h *handle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	remote, err := url.Parse("http://" + h.host + ":" + h.port)
 	if err != nil {
@@ -22,8 +24,8 @@ func (h *handle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	h := &handle{
-		host:"localhost",
-		port:"9091",
+		host: "localhost",
+		port: "9091",
 	}
 	//proxy
 	err := http.ListenAndServe(":89", h)
