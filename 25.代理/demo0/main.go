@@ -19,15 +19,21 @@ var URLs = []*url.URL{
 		Host:   "localhost:7001",
 	},
 }
+
 func NewProxy(c *gin.Context) {
 	target := URLs[rand.Int() % len(URLs)]
 	fmt.Printf("host:%s\n", target.Host)
 	proxy := httputil.NewSingleHostReverseProxy(target)
+
 	proxy.ServeHTTP(c.Writer, c.Request)
 }
+func AddRouter(router *gin.Engine) {
+	router = gin.Default()
+	router.GET("/ping", NewProxy)
+	router.POST("/user",NewProxy)
+}
 func main() {
-	r := gin.Default()
-	r.GET("/ping", NewProxy)
-	r.POST("/user",NewProxy)
-	r.Run(":8080")
+	router := gin.Default()
+	AddRouter(router)
+	router.Run(":8080")
 }

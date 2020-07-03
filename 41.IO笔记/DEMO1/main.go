@@ -31,6 +31,6 @@ func CopyData(rd io.Reader) []byte  {
 	return buf.Bytes()
 }
 func CopyTee(rd io.Reader) io.Writer {
-	buf := bytes.NewReader(nil)
-	io.TeeReader(buf, )
+	// buf := bytes.NewReader(nil)
+	// io.TeeReader(buf, )
 }

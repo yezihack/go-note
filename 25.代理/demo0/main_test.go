@@ -1,22 +1,27 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+
+	"fmt"
 	"testing"
 )
 
-func TestNewProxy(t *testing.T) {
-	type args struct {
-		c *gin.Context
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-		})
-	}
+type Response struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+	Server string `json:"server"`
+}
+
+func TestPing(t *testing.T) {
+	uri := "/ping"
+	body := Get(uri, router)
+	fmt.Print(string(body))
+	// resp := Response{}
+	// if err := json.Unmarshal(body, &resp); err != nil {
+	// 	t.Fatal(err)
+	// }
+	// if resp.Code != 200 {
+	// 	t.Errorf("got:%d, want:%d\n", resp.Code, 200)
+	// }
+	// println(resp.Code, resp.Msg, resp.Server)
 }
