@@ -32,9 +32,9 @@ func main() {
 func Show(stop chan struct{}) {
 	ticker := time.NewTicker(time.Second) //Ticker一但被定义, 每隔一段时间会自动触发.
 	timer := time.NewTimer(time.Second)   //Timer 定义后固定只执行一次,使用Reset会再触发一次.
-
 	//Ticker的实现
 	go func(t *time.Ticker) {
+
 		for {
 			select {
 			case <-t.C:

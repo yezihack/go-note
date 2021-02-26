@@ -6,14 +6,15 @@ import (
 )
 
 func TestDouble(t *testing.T) {
-	a := 10
-	Double(&a)
-	fmt.Println(a)
-	p := &a
-	Double(p)
-	fmt.Println(a, p == nil)
+	//a := 10
+	//Double(&a)
+	//fmt.Println(a)
+	//p := &a
+	//Double(p)
+	//fmt.Println(a, p == nil)
 }
 func TestInt2float(t *testing.T) {
 	a := 10
-	Int2float(a)
+	f := Int2float(a)
+	fmt.Printf("float:%f\n", f)
 }
